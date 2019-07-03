@@ -1,60 +1,14 @@
-var tigger = {
-    character: "Tigger",
-    greet: function(){
-        console.log("Tigger says, 'The wonderful thing about Tiggers is Tiggers are wonderful things!'");
-    }
-};
-var pooh = {
-    character: "Winnie the Pooh",
-    greet: function(){
-        console.log("Pooh says, 'HELLLOOOOOO!'");
-    }
-};
-var piglet = { character: "Piglet",
-    greet: function(){
-        console.log("Piglet says, 'Welcome to my home!'");
-    }
-};
-var bees = { character: "Bees",
-    greet: function(){
-        console.log("Bzzz!");
-    }
-};
-var christopher = { character: "Christopher Robin",
-    greet: function(){
-        console.log("Christopher says, 'Welcome Welcome!'");
-    }
-};
-var owl = { character: "Owl",
-    greet: function(){
-        console.log("Owl says, 'Hoot hoot!'");
-    }
-};
-var rabbit = { character: "Rabbit",
-    greet: function(){
-        console.log("Rabbit says, 'Helllooooo'");
-    }
-};
-var gopher = { character: "Gopher",
-    greet: function(){
-        console.log("Gopher says, 'Helloo!'");
-    }
-};
-var kanga = { character: "Kanga",
-    greet: function(){
-        console.log("Kanga says, 'Helloooo!'");
-    }
-};
-var eeyore = { character: "Eeyore",
-    greet: function(){
-        console.log("Eeyore says,m 'HelLLOloooo'");
-    }
-};
-var heffolumps = { character: "Heffolumps",
-    greet: function(){
-        console.log("Heffolumps says, 'Welcome!'");
-    }
-};
+var tigger = { character: "Tigger" };
+var pooh = { character: "Winnie the Pooh" };
+var piglet = { character: "piglet" };
+var bees = { character: "Bees" };
+var christopher = { character: "Christopher Robin" };
+var owl = { character: "owl" };
+var rabbit = { character: "Rabbit" };
+var gopher = { character: "Gopher" };
+var kanga = { character: "Kanga" };
+var eeyore = { character: "Eeyore" };
+var heffolumps = { character: "Heffolumps" };
 
 tigger.north = pooh;
 pooh.south = tigger;
@@ -88,42 +42,38 @@ var player = {
 function move(dir){
     if(dir == "north" || dir == "North"){
         if(player.location.north == null){
-            console.log("You attempt to head North, but unfortunately the path is blocked.")
+            console.log("You attempted to head North, but unfortunately the path is blocked.")
         }
         else {
             player.location = player.location.north;
-            console.log("You head North and arrive at " + player.location.character + "'s house!");
-            player.location.greet();
+            console.log("You headed North and arrived at " + player.location.character + "'s house!");
         }
     }
     if(dir == "south" || dir == "South"){
         if(player.location.south == null){
-            console.log("You attempt to head South, but unfortunately the path is blocked.")
+            console.log("You attempted to head South, but unfortunately the path is blocked.")
         }
         else {
             player.location = player.location.south;
-            console.log("You head South and arrive at " + player.location.character + "'s house!");
-            player.location.greet();
+            console.log("You headed South and arrived at " + player.location.character + "'s house!");
         }
     }
     if(dir == "east" || dir == "East"){
         if(player.location.east == null){
-            console.log("You attempt to head East, but unfortunately the path is blocked.")
+            console.log("You attempted to head East, but unfortunately the path is blocked.")
         }
         else {
             player.location = player.location.east;
-            console.log("You head East and arrive at " + player.location.character + "'s house!");
-            player.location.greet();
+            console.log("You headed East and arrived at " + player.location.character + "'s house!");
         }
     }
     if(dir == "west" || dir == "West"){
         if(player.location.west == null){
-            console.log("You attempt to head West, but unfortunately the path is blocked.")
+            console.log("You attempted to head West, but unfortunately the path is blocked.")
         }
         else {
             player.location = player.location.west;
-            console.log("You head West and arrive at " + player.location.character + "'s house!");
-            player.location.greet();
+            console.log("You headed West and arrived at " + player.location.character + "'s house!");
         }
     }
 }
