@@ -7,6 +7,7 @@ var session = require("express-session");
 var flash = require("express-flash");
 mongoose.Promise = global.Promise;
 mongoose.set('useFindAndModify', false)
+const Schema = mongoose.Schema;
 
 //Config
 app.set("views", __dirname + "/views");
@@ -34,7 +35,7 @@ var CommentSchema = new mongoose.Schema({
 var MessageSchema = new mongoose.Schema({
     name: {type: String, required: [true, "Your name is required!"], minlength: 3},
     message: {type: String, required: [true, "Message field can not be left blank!"], minlength: 3},
-    comments: [CommentSchema]
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
     }, {timestamps: true})
 
     mongoose.model("Comment", CommentSchema);
@@ -45,40 +46,41 @@ var MessageSchema = new mongoose.Schema({
 
 //Routes
 app.get("/", function(req, res){
-    console.log("~Root~");
+    console.log("Root");
     Message.find().populate("comments").exec(function(err, messages){
         if(err){
-            console.log("~Error matching DB request!~");
+            console.log("Error matching DB request!");
         }
         else{
+          console.log(messages);
             res.render("index", {posts:messages});
         }
     })
 });
 
 app.post("/message", function(req, res){
-    console.log("~Message~", req.body);
+    console.log("Message", req.body);
     var message = new Message({name: req.body.name, message: req.body.message});
     message.save(function(err){
         if(err){
-            console.log("~Something went wrong!~", err);
+            console.log("Something went wrong!", err);
             for(var key in err.errors){
                 req.flash("messageform", err.errors[key].message);
             }
             res.redirect("/");
         }
         else{
-            console.log("~Successfully added a message!~");
+            console.log("Successfully added a message!");
             res.redirect("/");
         }
     })
 });
 
 app.post("/comment", function(req, res){
-    console.log("~Comment~", req.body);
+    console.log("Comment", req.body);
     Comment.create({name: req.body.name, comment: req.body.comment}, function(err, comment) {
         if(err){
-            console.log("~Something went wrong~", err);
+            console.log("Something went wrong", err);
             for(var key in err.errors){
                 req.flash("commentform", err.errors[key].message);
             }
@@ -87,7 +89,7 @@ app.post("/comment", function(req, res){
         else{
             Message.findOneAndUpdate({_id: req.body.msgId}, {$push: {comments: comment}}, function(err, data) {
                 if(err){
-                    console.log("~Something went wrong~", err);
+                    console.log("Something went wrong", err);
                     res.redirect('/');
                 }
                 else{
