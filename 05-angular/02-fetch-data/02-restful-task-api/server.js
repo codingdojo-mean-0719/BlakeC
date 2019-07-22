@@ -18,11 +18,12 @@ app.use(helmet())
   .use(parser.json())
   .use(parser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://localhost/restful_task_API");
-require('./server/models/task.model.js');
+//require database.js config file
+require('./server/config/database');
 
 //routes
 app.use('/tasks', require('./server/config/routes/task.routes'));
+// require('./server/config/routes/task.routes.js')(app);
 
 
 

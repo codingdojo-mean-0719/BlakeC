@@ -3,8 +3,11 @@ const errorHandler = require('./concerns/error-handler');
 
 module.exports = {
   index(request, response) {
-    Task.find(request.body)
-      .then(tasks => response.json(tasks))
+    Task.find({})
+      .then(tasks => {
+        console.log(tasks);
+        response.json(tasks);
+      })
       .catch(errorHandler.bind(response));
   },
   show(request, response) {
@@ -13,6 +16,7 @@ module.exports = {
       .catch(errorHandler.bind(response));
   },
   create(request, response) {
+    console.log(request.body,"STRING CREATE");
     Task.create(request.body)
       .then(task => response.json(task))
       .catch(errorHandler.bind(response));
