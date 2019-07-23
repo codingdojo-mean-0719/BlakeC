@@ -11,12 +11,12 @@ module.exports = {
       .catch(errorHandler.bind(response));
   },
   show(request, response) {
-    Task.findById(request.params.id)
+    Task.findById({ _id: request.params.id })
       .then(task => response.json(task))
       .catch(errorHandler.bind(response));
   },
   create(request, response) {
-    console.log(request.body,"STRING CREATE");
+    console.log(request.body, 'STRING CREATE');
     Task.create(request.body)
       .then(task => response.json(task))
       .catch(errorHandler.bind(response));
